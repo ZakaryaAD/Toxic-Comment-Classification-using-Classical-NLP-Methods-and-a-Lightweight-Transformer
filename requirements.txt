@@ -3,11 +3,13 @@
 pandas
 matplotlib
 numpy
-torch
+#torch mieux de le faire manuellement. 
 datasets
 scikit-learn
 symspellpy
 nltk
+ipywidgets
+contractions
 
 flake8
 black
