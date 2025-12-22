@@ -205,3 +205,24 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Project data (never version data files)
+data/
+!data/**/.gitkeep
+
+# Trained models / checkpoints
+models/
+!models/**/.gitkeep
+
+# Reports figures generated automatically
+reports/figures/
+!reports/figures/.gitkeep
+
+# HF / experiment caches (optional but recommended)
+__pycache__/
+*.pkl
+*.pth
+*.pt
+wandb/
+mlruns/
+.runs/
