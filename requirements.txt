@@ -1,0 +1,17 @@
+# python version : 3.11.14
+
+pandas
+matplotlib
+numpy
+torch
+datasets
+scikit-learn
+symspellpy
+nltk
+
+flake8
+black
+
+ipykernel
+unidecode
+num2words
