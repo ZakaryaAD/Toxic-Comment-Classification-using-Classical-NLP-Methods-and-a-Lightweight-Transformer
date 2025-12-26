@@ -10,6 +10,7 @@ symspellpy
 nltk
 ipywidgets
 contractions
+spacy
 
 flake8
 black
