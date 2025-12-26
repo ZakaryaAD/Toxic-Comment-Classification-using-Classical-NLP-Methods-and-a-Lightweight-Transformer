@@ -246,7 +246,7 @@ def _remove_punctuation(text: str) -> str:
 def preprocess(text: str, *, nlp, stopwords: set[str]) -> str:
     """
     xLSTM-inspired light preprocessing:
-    lowercase -> remove URLs/emails -> replace numbers -> expand contractions-> lemmatize -> stopwords ->  punctuation -> whitespace normalize
+    lowercase -> remove URLs/emails -> replace numbers -> unidecode  -> expand contractions-> lemmatize -> stopwords ->  punctuation -> whitespace normalize
     """
     if text is None:
         return ""
@@ -255,6 +255,7 @@ def preprocess(text: str, *, nlp, stopwords: set[str]) -> str:
     x = _remove_urls(x)  # 3
     x = _remove_emails(x)   # 3 
     x = _replace_numbers(x, token="<NUM>")  # 3
+    x = unidecode(x)
     x = contractions.fix(x)    # Expand contractions
     x = _norm_ws(x)
     x = _spacy_lemma(x, nlp)  # 2
@@ -272,6 +273,7 @@ def preprocess_from_doc(doc, stopwords: set[str]) -> str:
     x = _remove_urls(x)
     x = _remove_emails(x)
     x = _replace_numbers(x, token="<NUM>")
+    x = unidecode(x)
     x = contractions.fix(x)
     # x = _norm_ws(x)
     x = " ".join(tok.lemma_ for tok in doc if not tok.is_space)
