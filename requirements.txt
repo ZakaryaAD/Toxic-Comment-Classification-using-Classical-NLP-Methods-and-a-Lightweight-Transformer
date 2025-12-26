@@ -18,3 +18,8 @@ black
 ipykernel
 unidecode
 num2words
+
+
+sentencepiece
+openpyxl
+pyarrow
