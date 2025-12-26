@@ -23,3 +23,6 @@ num2words
 sentencepiece
 openpyxl
 pyarrow
+
+xgboost
+xlsxwriter
