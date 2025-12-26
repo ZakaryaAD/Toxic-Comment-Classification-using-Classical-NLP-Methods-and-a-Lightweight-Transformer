@@ -218,6 +218,9 @@ models/
 reports/figures/
 !reports/figures/.gitkeep
 
+reports/tables/
+!reports/tables/.gitkeep
+
 # HF / experiment caches (optional but recommended)
 __pycache__/
 *.pkl
