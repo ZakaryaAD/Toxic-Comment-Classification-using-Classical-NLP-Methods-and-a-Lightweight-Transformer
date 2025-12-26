@@ -19,10 +19,14 @@ python -m venv .venv
 # Windows PowerShell
 .\.venv\Scripts\Activate.ps1
 
-### 2) Install PyTorch (CPU version)
+### 2) Install PyTorch (CPU version) and spacy 
 
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 The CPU version is intentionally used to ensure reproducibility across all machines.
+
+python -m spacy download en_core_web_sm
+python -m nltk.downloader stopwords punkt wordnet averaged_perceptron_tagger
+
 
 ### 3) Install remaining dependencies
 
@@ -37,23 +41,24 @@ No manual download of CSV files is required.
 
 ## Project Structure
 
-data/
+1) data/
 ├── raw/                # raw data cache (optional, not versioned)
 ├── processed/          # processed datasets (not versioned)
 
-notebooks/
-├── data_exploration.ipynb
+2) notebooks/
+├── EDA.ipynb
 ├── preprocessing.ipynb
 ├── model_baselines.ipynb
+├──preprocessing_draft_from_repo.ipynb
 
-src/
+3) src/
 ├── preprocessing.py    # text cleaning and normalization
 ├── models/
 │   ├── naive_bayes.py
 │   └── transformer.py
 ├── utils.py
 
-models/                 # trained models (not versioned)
+4) models/                 # trained models (not versioned)
 reports/
 ├── figures/
 └── report.pdf

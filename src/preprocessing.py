@@ -164,3 +164,55 @@ def preprocess(text:str) -> str:
     text = ' '.join(text)                            # Join sentences 
     text = multispace.transform(text)                # Remove multiple consecutive spaces
     return text.strip()                              # Remove leading/trailing whit
+
+
+
+################# Helpers + pipeline xLSTM light
+
+
+import re
+
+_URL_RE = re.compile(r"https?://\S+|www\.\S+")
+_EMAIL_RE = re.compile(r"\b[\w\.-]+@[\w\.-]+\.\w+\b")
+_NUM_RE = re.compile(r"\b\d+(\.\d+)?\b")
+
+def _lower(text: str) -> str:
+    return text.lower()
+
+def _remove_urls(text: str) -> str:
+    return _URL_RE.sub(" ", text)
+
+def _remove_emails(text: str) -> str:
+    return _EMAIL_RE.sub(" ", text)
+
+def _replace_numbers(text: str, token: str = "<NUM>") -> str:
+    return _NUM_RE.sub(f" {token} ", text)
+
+def _norm_ws(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+def _spacy_lemma(text: str, nlp) -> str:
+    doc = nlp(text)
+    return " ".join(tok.lemma_ for tok in doc if not tok.is_space)
+
+def _remove_stopwords(text: str, stopwords: set[str]) -> str:
+    toks = text.split()
+    return " ".join(t for t in toks if t not in stopwords)
+
+def preprocess_light_xlstm(text: str, *, nlp, stopwords: set[str]) -> str:
+    """
+    xLSTM-inspired light preprocessing:
+    lowercase -> remove URLs/emails -> replace numbers -> lemmatize -> stopwords -> whitespace normalize
+    """
+    if text is None:
+        return ""
+    x = text
+    x = _lower(x)
+    x = _remove_urls(x)
+    x = _remove_emails(x)
+    x = _replace_numbers(x, token="<NUM>")
+    x = _norm_ws(x)
+    x = _spacy_lemma(x, nlp)
+    x = _remove_stopwords(x, stopwords)
+    x = _norm_ws(x)
+    return x
