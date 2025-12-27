@@ -178,7 +178,7 @@ _NUM_RE = re.compile(r"\b\d+(\.\d+)?\b")
 _PUNCTUATION = re.compile(r"[^\w\s]")
 _DUPE_CHARS  = {r"([A-Za-z])\1{2,}"          : r"\1\1"}  # Deduplication of multiple consecutive sequences of consecutive duplicate characters 
                                                         # in a string. eg: cooool -> cool, goooaaal -> goal
-
+_HTML        = {r'<.*?>'}    # Removal of html tags
 
 def _lower(text: str) -> str:
     return text.lower()
@@ -250,6 +250,11 @@ def _remove_duplicates(text: str) -> str:
         text = re.sub(pattern, repl, text)
     return text
 
+def _remove_html(text: str) -> str:
+    for pattern in _HTML:
+        text = re.sub(pattern, " ", text)
+    return text
+
 def preprocess(text: str, *, nlp, stopwords: set[str]) -> str:
     """
     xLSTM-inspired light preprocessing:
@@ -263,6 +268,7 @@ def preprocess(text: str, *, nlp, stopwords: set[str]) -> str:
     x = _remove_emails(x)   # 3 
     x = _replace_numbers(x, token="<NUM>")  # 3
     x = unidecode(x)
+    x = _remove_html(x)
     x = _remove_duplicates(x)
     x = contractions.fix(x)    # Expand contractions
     # x = _norm_ws(x)
@@ -282,6 +288,7 @@ def preprocess_from_doc(doc, stopwords: set[str]) -> str:
     x = _remove_emails(x)
     x = _replace_numbers(x, token="<NUM>")
     x = unidecode(x)
+    x = _remove_html(x)
     x = contractions.fix(x)
     x = _remove_duplicates(x)
     # x = _norm_ws(x)
