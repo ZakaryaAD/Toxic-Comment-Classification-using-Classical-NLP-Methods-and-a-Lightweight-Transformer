@@ -258,7 +258,7 @@ def _remove_html(text: str) -> str:
 def preprocess(text: str, *, nlp, stopwords: set[str]) -> str:
     """
     xLSTM-inspired light preprocessing:
-    lowercase -> remove URLs/emails -> replace numbers -> unidecode  -> expand contractions-> lemmatize -> stopwords ->  punctuation -> whitespace normalize
+    lowercase -> remove URLs/emails -> replace numbers -> unidecode -> HTML artifacts -> expand contractions-> lemmatize -> stopwords ->  punctuation -> whitespace normalize
     """
     if text is None:
         return ""
