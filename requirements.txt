@@ -1,0 +1,28 @@
+# python version : 3.11.14
+
+pandas
+matplotlib
+numpy
+#torch mieux de le faire manuellement. 
+datasets
+scikit-learn
+symspellpy
+nltk
+ipywidgets
+contractions
+spacy
+
+flake8
+black
+
+ipykernel
+unidecode
+num2words
+
+
+sentencepiece
+openpyxl
+pyarrow
+
+xgboost
+xlsxwriter
