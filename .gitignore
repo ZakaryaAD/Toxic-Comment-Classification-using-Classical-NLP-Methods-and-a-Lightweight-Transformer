@@ -214,7 +214,7 @@ __marimo__/
 !models/**/.gitkeep
 
 # Reports figures generated automatically
-reports/figures/
+
 !reports/figures/.gitkeep
 
 reports/tables/
@@ -223,7 +223,7 @@ reports/tables/
 # HF / experiment caches (optional but recommended)
 __pycache__/
 *.pkl
-*.pth
+
 *.pt
 wandb/
 mlruns/
