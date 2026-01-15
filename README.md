@@ -13,18 +13,18 @@ The final experiments are conducted on the **binarized multilabel dataset**:
 **`jigsaw-toxic-comment-classification-challenge`**  
 (6 binary labels: toxic, severe_toxicity, obscene, threat, insult, identity_attack)
 
-This is the dataset used in the report and in the main training/evaluation notebooks.
+
 ---
 ## Reproducibility & “do not rerun everything”
 
 To avoid re-running heavy preprocessing and overnight training:
 
 ### 1) Processed data is stored locally (if present)
-If you already have the processed splits in `data/processed/`, you **do not need** to re-run the full preprocessing pipeline.
-Notebooks will directly reuse the processed files (when available).
+You **do not need** to re-run the full preprocessing pipeline, the processed splits are in `data/processed/`
+Notebooks will directly reuse the processed files.
 
 - `data/raw/` is optional cache (not versioned)
-- `data/processed/` contains processed datasets/splits (recommended to keep locally)
+- `data/processed/` contains processed datasets/splits 
 
 > If `data/processed/` is missing on your machine, notebooks will re-download and re-process from the dataset.
 
@@ -35,7 +35,6 @@ For the from-scratch Transformer, the final model weights and the associated voc
 
 So you can **evaluate / reproduce metrics without retraining overnight**.
 
-> If `models/` files are missing, the notebook can retrain the model, but this is slow on CPU.
 
 ---
 ## Installation
@@ -95,20 +94,50 @@ models/
 └── (saved weights + vocabulary for lightweight transformer, if provided)
 ```
 
+
 ## Recommended Workflow
-1) Exploratory Data Analysis
-notebooks/data_exploration.ipynb
 
-2) Preprocessing Experiments
-Comparison between light and aggressive text cleaning strategies
-notebooks/preprocessing.ipynb
+1) Exploratory Data Analysis  
+Run:  
+notebooks/EDA_xlstm table.ipynb  
 
-3) Baseline Models
-TF-IDF + linear models, Naive Bayes
-notebooks/model_baselines.ipynb
+Produces dataset statistics and class imbalance visualizations.
 
-4) Transformer Model
-Lightweight Transformer encoder implemented and evaluated incrementally
+2) Preprocessing Experiments  
+Run:  
+notebooks/preprocessing_xlstm_table.ipynb  
+
+Compares:
+- Light preprocessing (xLSTM-style)  
+- Aggressive preprocessing
+
+3) Naive Bayes baseline (from scratch)  
+Run:  
+notebooks/naive_bayes_classification.ipynb  
+
+Uses:
+- src/models/naive_bayes.py  
+- CountVectorizer word-count features  
+- One-vs-rest training per label
+
+4) TF-IDF + XGBoost  
+(If included in notebooks)
+
+- Train one XGBoost model per label  
+- Thresholds selected on validation set by maximizing F1-score
+
+5) DistilBERT fine-tuning  
+Run:  
+notebooks/distilbert_finetuning.ipynb  
+
+Training is slow on CPU. GPU recommended if available.
+
+6) Lightweight Transformer (from scratch)  
+Run:  
+notebooks/simple_transformer_classification.ipynb  
+
+If saved weights exist in models/, evaluation runs directly.  
+Otherwise, training runs from scratch (long on CPU).
 
 ## Notes on Reproducibility
 Virtual environments (.venv) are not versioned.
