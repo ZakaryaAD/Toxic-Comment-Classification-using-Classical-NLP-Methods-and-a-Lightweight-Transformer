@@ -33,6 +33,7 @@ Notebooks will directly reuse the processed files.
 For the from-scratch Transformer, the final model weights and the associated vocabulary are saved under:
 
 - `models/`
+Same for xgboost and naive bayes models, we couldn't uopload the finetuned DistilBert on Github since it's heavy
 
 So you can **evaluate / reproduce metrics without retraining overnight**.
 
