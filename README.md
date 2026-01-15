@@ -26,7 +26,7 @@ Notebooks will directly reuse the processed files.
 - `data/raw/` is optional cache (not versioned)
 - `data/processed/` contains processed datasets/splits 
 
-> If `data/processed/` is missing on your machine, you need to run the notebook `1_preprocessing.ipynb`
+> If `data/processed/` is missing on your machine, you need to run the notebook `2_preprocessing.ipynb`
 .
 
 ### 2) Lightweight Transformer: weights + vocabulary are saved
@@ -74,12 +74,12 @@ pip install -r requirements.txt
 ## Project Structure
 ```bash
 data/
-├── raw/                # raw cache (optional)
+├── raw/                # raw cache 
 └── processed/          # processed datasets/splits (recommended to keep locally)
 
 notebooks/
-├── 1_preprocessing.ipynb
-├── 2_EDA.ipynb
+├── 1_EDA.ipynb
+├── 2_preprocessing.ipynb
 ├── 3_naive_bayes_classification.ipynb
 ├── 5_distilbert_finetuning.ipynb
 └── 6_simple_transformer_classification.ipynb
@@ -100,13 +100,13 @@ models/
 
 1) Exploratory Data Analysis  
 Run:  
-notebooks/EDA_xlstm table.ipynb  
+notebooks/1_EDA.ipynb  
 
 Produces dataset statistics and class imbalance visualizations.
 
 2) Preprocessing Experiments  
 Run:  
-notebooks/preprocessing_xlstm_table.ipynb  
+notebooks/2_preprocessing.ipynb  
 
 Compares:
 - Light preprocessing (xLSTM-style)  
@@ -114,7 +114,7 @@ Compares:
 
 3) Naive Bayes baseline (from scratch)  
 Run:  
-notebooks/naive_bayes_classification.ipynb  
+notebooks/3_naive_bayes_classification.ipynb  
 
 Uses:
 - src/models/naive_bayes.py  
@@ -122,20 +122,20 @@ Uses:
 - One-vs-rest training per label
 
 4) TF-IDF + XGBoost  
-(If included in notebooks)
-
+Run:  
+notebooks/4_tfidf_xgboost_classification.ipynb  
 - Train one XGBoost model per label  
 - Thresholds selected on validation set by maximizing F1-score
 
 5) DistilBERT fine-tuning  
 Run:  
-notebooks/distilbert_finetuning.ipynb  
+notebooks/5_distilbert_finetuning.ipynb  
 
 Training is slow on CPU. GPU recommended if available.
 
 6) Lightweight Transformer (from scratch)  
 Run:  
-notebooks/simple_transformer_classification.ipynb  
+notebooks/6_simple_transformer_classification.ipynb  
 
 If saved weights exist in models/, evaluation runs directly.  
 Otherwise, training runs from scratch (long on CPU).
