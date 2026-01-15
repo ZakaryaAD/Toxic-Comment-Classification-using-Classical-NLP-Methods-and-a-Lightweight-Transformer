@@ -26,7 +26,8 @@ Notebooks will directly reuse the processed files.
 - `data/raw/` is optional cache (not versioned)
 - `data/processed/` contains processed datasets/splits 
 
-> If `data/processed/` is missing on your machine, notebooks will re-download and re-process from the dataset.
+> If `data/processed/` is missing on your machine, you need to run the notebook `1_preprocessing.ipynb`
+.
 
 ### 2) Lightweight Transformer: weights + vocabulary are saved
 For the from-scratch Transformer, the final model weights and the associated vocabulary are saved under:
@@ -77,11 +78,11 @@ data/
 └── processed/          # processed datasets/splits (recommended to keep locally)
 
 notebooks/
-├── EDA_xlstm table.ipynb
-├── preprocessing_xlstm_table.ipynb
-├── naive_bayes_classification.ipynb
-├── simple_transformer_classification.ipynb
-└── distilbert_finetuning.ipynb
+├── 1_preprocessing.ipynb
+├── 2_EDA.ipynb
+├── 3_naive_bayes_classification.ipynb
+├── 5_distilbert_finetuning.ipynb
+└── 6_simple_transformer_classification.ipynb
 
 src/
 ├── __init__.py
