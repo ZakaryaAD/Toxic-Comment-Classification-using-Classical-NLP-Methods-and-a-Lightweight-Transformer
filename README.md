@@ -13,25 +13,27 @@ This repository contains the code and resources for the Advanced Machine Learnin
 ---
 
 ### 1) Create a virtual environment
-
+```bash
 python -m venv .venv
-
+```
 # Windows PowerShell
+```bash
 .\.venv\Scripts\Activate.ps1
 
 ### 2) Install PyTorch (CPU version) and spacy 
-
+```bash
 pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
 The CPU version is intentionally used to ensure reproducibility across all machines.
-
+```bash
 python -m spacy download en_core_web_sm
 python -m nltk.downloader stopwords punkt wordnet averaged_perceptron_tagger
-
+```
 
 ### 3) Install remaining dependencies
-
+```bash
 pip install -r requirements.txt
-
+```
 
 ## Dataset
 The experiments are conducted on the Civil Comments dataset (Google / Jigsaw).
@@ -40,7 +42,7 @@ The dataset is automatically downloaded using the HuggingFace datasets library.
 No manual download of CSV files is required.
 
 ## Project Structure
-
+```bash
 1) data/
 ├── raw/                # raw data cache (optional, not versioned)
 ├── processed/          # processed datasets (not versioned)
@@ -62,7 +64,7 @@ No manual download of CSV files is required.
 reports/
 ├── figures/
 └── report.pdf
-
+```
 ## Recommended Workflow
 1) Exploratory Data Analysis
 notebooks/data_exploration.ipynb
