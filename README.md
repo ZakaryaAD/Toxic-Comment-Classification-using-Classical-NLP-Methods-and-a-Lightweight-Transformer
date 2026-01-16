@@ -141,6 +141,51 @@ notebooks/6_simple_transformer_classification.ipynb
 If saved weights exist in models/, evaluation runs directly.  
 Otherwise, training runs from scratch (long on CPU).
 
+## Code origin and implementation details
+
+This project was developed specifically for the ENSAE Advanced Machine Learning course project.  
+All experiments, preprocessing pipelines, model training scripts, and evaluation notebooks were written by the authors for this project, with some help of LLMs.
+
+### Original code implemented from scratch
+
+To comply with the course requirement of implementing core ML components ourselves, we manually implemented:
+
+#### Multinomial Naive Bayes classifier
+Implemented from scratch in `src/models/naive_bayes.py`.  
+This includes manual computation of class priors, word conditional probabilities with Laplace smoothing, and prediction using log-posterior maximization.  
+Only `CountVectorizer` from scikit-learn is used to build the word-count matrices.  
+No external Naive Bayes implementation from libraries was used.
+
+#### Lightweight Transformer encoder
+Implemented from scratch in `src/models/simple_transformer.py` using PyTorch.  
+The architecture design follows the original Transformer paper ("Attention is All You Need"), but all code was written manually for this project.
+
+#### Preprocessing pipelines
+The two preprocessing strategies (light and aggressive) were implemented in our own preprocessing scripts and notebooks.  
+They combine standard NLP tools (spaCy, NLTK, SymSpell, etc.), but the pipeline logic and experiments are fully original.
+
+### Use of external libraries
+
+We rely on well-established external libraries for standard components:
+
+- `scikit-learn` for CountVectorizer, TfidfVectorizer, train/validation/test splitting, and metric computation.
+- `xgboost` for gradient boosted decision trees in the TF-IDF + XGBoost baseline.
+- `transformers` (HuggingFace) for loading the pretrained DistilBERT model in the fine-tuning experiment.
+- `PyTorch` for neural network training and optimization.
+
+No external code from other GitHub repositories was copied into this project.
+
+### Adaptation from research references
+
+Some modeling choices are inspired by existing research papers:
+
+- Light preprocessing strategy inspired by the xLSTM toxic-comment paper.
+- Transformer architecture design inspired by the original Vaswani et al. paper.
+- DistilBERT fine-tuning follows standard HuggingFace examples.
+
+However, **all implementations in this repository are written by the authors**, not copied from external repositories.  
+Only high-level methodological ideas were taken from literature and re-implemented.
+
 ## Notes on Reproducibility
 Virtual environments (.venv) are not versioned.
 
